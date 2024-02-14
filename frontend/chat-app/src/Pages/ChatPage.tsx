@@ -47,7 +47,6 @@ const ChatPage: React.FC = () => {
       if (document.hidden) {
         notification.play();
       }
-      console.log(mySocketId, message.socketId);
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
