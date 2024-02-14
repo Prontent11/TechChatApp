@@ -1,7 +1,7 @@
 Certainly! Here is the content in a single Markdown file:
 
-````markdown
-#[Demo Video](https://www.youtube.com/watch?v=4uO5S-Y0DKw)
+
+# [Demo Video](https://www.youtube.com/watch?v=4uO5S-Y0DKw)
 # React Chat App
 
 This is a simple chat application built with React, Socket.IO, and Express.
@@ -25,18 +25,19 @@ The project is organized into two main folders:
 
 ### Frontend
 
-```bash
+
+```
 cd frontend/chatapp
 npm install
 npm run dev
+
 ```
-````
 
 The app will be available at [http://localhost:5173](http://localhost:5173).
 
 ### Backend
 
-```bash
+```
 cd backend
 npm install
 node server.js
@@ -72,6 +73,3 @@ Feel free to explore and modify the code to fit your needs! If you encounter any
 
 Happy chatting!
 
-```
-
-```
