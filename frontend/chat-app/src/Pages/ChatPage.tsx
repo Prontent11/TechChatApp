@@ -12,7 +12,7 @@ interface MessageData {
   socketId: string;
 }
 
-const socket = io("http://localhost:5000");
+const socket = io(import.meta.env.VITE_SOCKET_API);
 
 const ChatPage: React.FC = () => {
   const [messages, setMessages] = useState<MessageData[]>([]);
