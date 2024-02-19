@@ -1,5 +1,5 @@
 // ChatPage.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Message from "../components/Message";
 import { ToastContainer, toast } from "react-toastify";
@@ -34,12 +34,16 @@ const ChatPage: React.FC = () => {
     });
     socket.emit("new-user", username);
     socket.on("new-user", (username) => {
-      toast.success(username + " joined the chat");
+      toast.success(username + " joined the chat", {
+        className: "w-[340px] sm:w-full",
+      });
       notification.play();
     });
 
     socket.on("user-disconnected", (username) => {
-      toast.error(username + " left the chat");
+      toast.error(username + " left the chat", {
+        className: "w-[340px] sm:w-full",
+      });
       notification.play();
     });
 
@@ -58,6 +62,18 @@ const ChatPage: React.FC = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // Function to scroll the chat container to the bottom
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       sendMessage();
@@ -78,12 +94,11 @@ const ChatPage: React.FC = () => {
   const handleBeforeUnload = () => {
     localStorage.removeItem("username");
     console.log("Username removed on page refresh.");
-    // Remove the event listener to prevent it from triggering again
     window.removeEventListener("beforeunload", handleBeforeUnload);
   };
 
   return (
-    <div className="h-full w-full p-2 border">
+    <div className="h-full w-full p-2 border ">
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -96,7 +111,11 @@ const ChatPage: React.FC = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="chatContainer p-3 h-[90%] w-full flex flex-col justify-start gap-6 overflow-y-auto">
+
+      <div
+        className="chatContainer  p-3 h-[90%] w-full min-w-[300px] flex flex-col justify-start gap-6  overflow-y-auto"
+        ref={chatContainerRef}
+      >
         {messages.map((message, index) => (
           <Message
             key={index}
@@ -108,13 +127,13 @@ const ChatPage: React.FC = () => {
           />
         ))}
       </div>
-      <div className="inputContainer border-t p-3 flex gap-10  ">
+      <div className="inputContainer border-t p-3 flex   ">
         <input
           autoFocus
           type="text"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          className=" p-2 text-xl w-full min-w-5 outline-none"
+          className=" p-2 sm:text-xl text-md w-full min-w-10 outline-none"
           placeholder="Type here..."
           onKeyDown={handleKeyPress}
         />

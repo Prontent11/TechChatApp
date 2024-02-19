@@ -5,7 +5,7 @@ import ProtectedRoute from "./Pages/PrivateRoute";
 const App = () => {
   return (
     <div className="bg-blue-300 h-screen flex justify-center  items-center">
-      <div className="h-[90%]  w-[90%]  p-10 bg-white   rounded-xl  drop-shadow-2xl ">
+      <div className="h-[90%]  w-[90%]  sm:p-10 p-5 bg-white  rounded-xl  drop-shadow-2xl ">
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>

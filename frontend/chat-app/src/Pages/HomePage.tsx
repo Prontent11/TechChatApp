@@ -23,18 +23,20 @@ const HomePage: React.FC = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center h-full w-full prose">
-        <h1 className="text-4xl font-bold mb-4">Welcome to TechChat</h1>
+        <h1 className="sm:text-4xl font-bold mb-4 text-2xl text-center">
+          Welcome to TechChat
+        </h1>
         <input
           type="text"
           placeholder="Enter your username"
           value={username}
           onChange={handleUsernameChange}
           onKeyDown={handleKeyPress}
-          className="p-2 border mb-4"
+          className="sm:p-2 p-2 border mb-4"
         />
         <button
           onClick={handleStartChat}
-          className="bg-blue-500 px-4 py-2 rounded-md text-white"
+          className="bg-blue-500 px-4 py-2  rounded-md text-white"
         >
           Start Chat
         </button>
